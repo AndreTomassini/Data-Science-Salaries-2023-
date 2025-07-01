@@ -1,0 +1,105 @@
+
+Prompt 1:
+Provide an overview of the dataset, including structure and column names. What are the most important libraries to import at the beginning of a data analysis project like this?
+
+AI Response:
+The dataset includes information on salaries for data science professionals from 2020 to 2023. Important libraries to import for data analysis include: pandas, numpy, matplotlib, seaborn, and scikit-learn. These libraries support data manipulation, visualization, and modeling.
+
+---
+
+Prompt 2:
+Update the read_csv function to reflect the correct path from my local machine.
+
+AI Response:
+Replace the dataset loading line with the following:
+df = pd.read_csv("C:/Users/andre/Downloads/ds_salaries.csv")
+
+---
+
+Prompt 3:
+Run df.describe() after df.head() to better understand statistical distribution before cleaning data.
+
+AI Response:
+Added df.describe() to show count, mean, std, min, max and percentiles, providing valuable context before applying any cleaning methods.
+
+---
+
+Prompt 4:
+Suggest a Python code snippet to perform data cleaning that:
+1. Identifies columns with missing values.
+2. Replaces missing values with column mean.
+3. Drops duplicate rows.
+
+AI Response:
+```python
+missing_cols = df.columns[df.isnull().any()]
+df[missing_cols] = df[missing_cols].fillna(df.mean(numeric_only=True))
+df.drop_duplicates(inplace=True)
+```
+
+---
+
+Prompt 5:
+Insert a Markdown summary of the data structure and statistical overview based on describe() and info() results.
+
+AI Response:
+The dataset contains 3755 entries and 18 columns. Key features include salary information, job title, location, and employment type. Data types include integer, float, object, and categorical values. Some columns required type conversion for proper analysis.
+
+---
+
+Prompt 6:
+Convert 'experience_level', 'employment_type', 'company_size' and other categorical columns to category type.
+
+AI Response:
+```python
+categorical_cols = ['experience_level', 'employment_type', 'company_size', 'employee_residence', 'company_location']
+for col in categorical_cols:
+    df[col] = df[col].astype('category')
+```
+
+---
+
+Prompt 7:
+Generate insights and visualizations using the following tasks:
+- Correlation matrix for top 5 features.
+- Value counts for categorical column.
+- Boxplot and regression plot.
+
+AI Response:
+Implemented seaborn heatmap, boxplot of experience vs. salary, regression plot of remote_ratio vs. salary_in_usd, and value counts for 'company_size'.
+
+---
+
+Prompt 8:
+Add Markdown blocks for each visualization explaining what is being shown and possible insights.
+
+AI Response:
+Each graph was accompanied by Markdown text summarizing key observations. For example, "There is a clear positive correlation between experience level and salary. Remote work appears to have limited correlation with salary."
+
+---
+
+Prompt 9:
+Implement Linear Regression using one feature. Then Polynomial Regression with more features. Also perform Ridge Regression using GridSearchCV.
+
+AI Response:
+All three models were implemented:
+- Linear Regression with R² ≈ 24%.
+- Polynomial Regression with R² improved to ≈ 33%.
+- Ridge Regression with cross-validation achieved R² ≈ 23%.
+
+---
+
+Prompt 10:
+Generate line plots for each model to show how predictions align with actual values.
+
+AI Response:
+Used matplotlib and seaborn to plot scatter plots of actual vs. predicted salary values, with regression lines showing fit for each model.
+
+---
+
+Prompt 11:
+Review the final project, compare model performances, and summarize insights for the conclusion section.
+
+AI Response:
+The analysis shows that while basic regression models explain a portion of the variance in salaries, more complex or enriched models (including external economic or regional features) may improve predictive power. Insights from this dataset help data science students understand the salary landscape and variables that influence compensation in their field.
+
